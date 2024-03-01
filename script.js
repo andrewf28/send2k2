@@ -2,50 +2,35 @@ document.getElementById('inputForm').addEventListener('submit', function(e) {
     e.preventDefault(); // Prevent the default form submission
 
     // Extract values from input fields
-    const textInput1 = document.getElementById('textInput1').value;
-    const textInput2 = document.getElementById('textInput2').value;
+    const pdfUrl = document.getElementById('textInput1').value;
+    const kindleEmail = document.getElementById('textInput2').value;
 
     // Construct the API URL with query string parameters
-    const apiUrl = `https://x5n0715e60.execute-api.us-east-2.amazonaws.com/default/paperizer?pdf_url=${encodeURIComponent(textInput1)}&kindle_email=${encodeURIComponent(textInput2)}`;
+    const apiUrl = `https://x5n0715e60.execute-api.us-east-2.amazonaws.com/default/paperizer?pdf_url=${encodeURIComponent(pdfUrl)}&kindle_email=${encodeURIComponent(kindleEmail)}`;
+
+    // Options for the fetch call, specifying it as a POST request
+    const fetchOptions = {
+        method: 'POST', // Use POST method
+        headers: {
+            'Content-Type': 'application/json' // Assuming JSON; adjust if necessary
+            // Include any other headers required by the API
+        },
+        // If the API expects a body, uncomment and adjust the following line:
+        // body: JSON.stringify({ key: 'value' }) // Adjust keys and values according to what the API expects
+    };
 
     // Make the API call
-    fetch(apiUrl, {
-        method: 'POST', // Assuming a POST request
-        headers: {
-            'Content-Type': 'application/json'
-            // Include other headers as required
-        },
-        // Include body if required by your API
-    })
-    .then(response => {
-        if (response.ok) {
-            // If the API call was successful and returned a 200 status
-            return response.json(); // or .text() if the response is text
-        } else {
-            // If the server response was not ok (e.g., 400, 401, 403, 404, 500, etc.)
-            throw new Error('Failed to fetch from API: ' + response.statusText);
-        }
-    })
-    .then(data => {
-        // Handle the successful response data
-        displayMessage('Success! Message from API: ' + data.message, 'success');
-    })
-    .catch(error => {
-        // Handle any errors
-        console.error('Error:', error);
-        displayMessage('Error making API call: ' + error.message, 'error');
-    });
+    fetch(apiUrl, fetchOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Assuming the response is JSON
+        })
+        .then(data => {
+            console.log(data); // Handle the response data
+        })
+        .catch(error => {
+            console.error('Error:', error); // Handle any errors
+        });
 });
-
-// Function to display a message to the user
-function displayMessage(message, type) {
-    const messageContainer = document.getElementById('messageContainer');
-    if (!messageContainer) {
-        console.error('Make sure your HTML includes an element with id="messageContainer"');
-        return;
-    }
-
-    messageContainer.textContent = message; // Set the text of the message container
-    messageContainer.className = ''; // Reset any previous class names
-    messageContainer.classList.add(type); // Add the 'success' or 'error' class
-}
