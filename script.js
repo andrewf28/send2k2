@@ -11,24 +11,19 @@ document.getElementById('inputForm').addEventListener('submit', function(e) {
     // Options for the fetch call, specifying it as a POST request
     const fetchOptions = {
         method: 'POST', // Use POST method
+        mode: 'no-cors', // Add no-cors mode here
         headers: {
             'Content-Type': 'application/json' // Assuming JSON; adjust if necessary
-            // Include any other headers required by the API
+            // Note: In no-cors mode, only a limited set of headers are exposed in the response
         },
-        // If the API expects a body, uncomment and adjust the following line:
-        // body: JSON.stringify({ key: 'value' }) // Adjust keys and values according to what the API expects
+        // Note: The body content is not used with no-cors mode in a meaningful way for the server,
+        // since you cannot read the response if no-cors is used
     };
 
     // Make the API call
     fetch(apiUrl, fetchOptions)
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json(); // Assuming the response is JSON
-        })
-        .then(data => {
-            console.log(data); // Handle the response data
+            console.log('Request made with no-cors mode, response is opaque.'); // You won't be able to read the response
         })
         .catch(error => {
             console.error('Error:', error); // Handle any errors
