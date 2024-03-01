@@ -4,7 +4,7 @@ document.getElementById('inputForm').addEventListener('submit', function(e) {
     // Extract values from input fields
     const pdfUrl = document.getElementById('textInput1').value;
     const kindleEmail = document.getElementById('textInput2').value;
-
+    //hji
     // Construct the API URL with query string parameters
     const apiUrl = `https://x5n0715e60.execute-api.us-east-2.amazonaws.com/default/paperizer?pdf_url=${encodeURIComponent(pdfUrl)}&kindle_email=${encodeURIComponent(kindleEmail)}`;
 
