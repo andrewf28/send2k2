@@ -6,7 +6,7 @@ document.getElementById('inputForm').addEventListener('submit', function(e) {
     const textInput2 = document.getElementById('textInput2').value;
 
     // Construct the API URL with query string parameters
-    const apiUrl = `YOUR_API_ENDPOINT?param1=${encodeURIComponent(textInput1)}&param2=${encodeURIComponent(textInput2)}`;
+    const apiUrl = `https://x5n0715e60.execute-api.us-east-2.amazonaws.com/default/paperizer?param1=${encodeURIComponent(textInput1)}&param2=${encodeURIComponent(textInput2)}`;
 
     // Make the API call
     fetch(apiUrl, {
