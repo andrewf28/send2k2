@@ -2,6 +2,15 @@
 <html>
 <head>
     <title>Simple API Call Example</title>
+    <style>
+        /* Add some basic styles for success and error messages */
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h2>Input Form</h2>
@@ -12,6 +21,9 @@
         <input type="text" id="textInput2" name="textInput2"><br><br>
         <button type="submit">Submit</button>
     </form>
+
+    <!-- Message container for displaying success/error messages -->
+    <div id="messageContainer"></div>
 
     <script src="script.js"></script>
 </body>
